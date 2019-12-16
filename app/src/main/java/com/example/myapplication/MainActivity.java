@@ -27,13 +27,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState != null) {
-            firstOperand = savedInstanceState.getDouble("first");
-            secondOperand = savedInstanceState.getDouble("second");
-            rawOperand = savedInstanceState.getString("operand");
-            operation = savedInstanceState.getString("oper");
-            result = savedInstanceState.getDouble("result");
-        }
             zero = findViewById(R.id.btn_zero);
             one = findViewById(R.id.btn_one);
             two = findViewById(R.id.btn_two);
@@ -51,16 +44,30 @@ public class MainActivity extends AppCompatActivity {
             equal = findViewById(R.id.btn_equal);
             dot = findViewById(R.id.btn_dot);
             resultTV = findViewById(R.id.resultTV);
+
+            if (savedInstanceState != null) {
+                firstOperand = savedInstanceState.getDouble("first");
+                secondOperand = savedInstanceState.getDouble("second");
+                operation = savedInstanceState.getString("oper");
+                rawOperand = savedInstanceState.getString("rawOper");
+                result = savedInstanceState.getDouble("result");
+            }
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putDouble("first", firstOperand);
-        outState.putDouble("second", secondOperand);
-        outState.putString("operand", rawOperand);
-        outState.putString("oper", operation);
-        outState.putDouble("result", result);
+        if (firstOperand != null){
+            outState.putDouble("first", firstOperand);
+        } if (secondOperand != null){
+            outState.putDouble("second", secondOperand);
+        } if (rawOperand != null){
+            outState.putString("rawOper", rawOperand);
+        } if (operation != null){
+            outState.putString("oper", operation);
+        } if (result != null ){
+            outState.putDouble("result", result);
+        }
     }
 
     public void onNumberClick(View v) {
@@ -153,6 +160,8 @@ public class MainActivity extends AppCompatActivity {
                             result = firstOperand - secondOperand;
                             resultTV.append("=" + result);
                             break;
+                            default:
+                                break;
                     }
                 }
             default:

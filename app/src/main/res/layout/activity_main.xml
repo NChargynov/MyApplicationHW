@@ -197,7 +197,6 @@
         android:layout_height="wrap_content"
         android:text="@string/clear"
         android:textSize="40sp"
-        android:onClick="onNumberClick"
         android:id="@+id/btn_clear"
         app:layout_constraintBottom_toTopOf="@+id/btn_seven"
         app:layout_constraintLeft_toLeftOf="@+id/btn_seven"
