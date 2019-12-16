@@ -20,8 +20,7 @@ public class MainActivity extends AppCompatActivity {
     Double secondOperand;
     String operation;
     Double result;
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
