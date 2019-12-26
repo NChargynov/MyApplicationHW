@@ -19,11 +19,10 @@
         />
 
     <TextView
-        android:id="@+id/resultTV"
+        android:id="@+id/resultTV2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="50sp"
-        android:hint="Введите числа"
         android:freezesText="true"
         app:layout_constraintBottom_toTopOf="@+id/btn_clear"
         android:layout_marginBottom="40dp"/>
@@ -216,12 +215,13 @@
         app:layout_constraintLeft_toLeftOf="@+id/btn_eight"
         app:layout_constraintRight_toRightOf="@+id/btn_eight"
         />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
         android:textSize="40sp"
-        android:onClick="onClickSave"
+        android:onClick="onStartNextActivityClick"
         android:id="@+id/btn_next_activity"
         app:layout_constraintBottom_toTopOf="@+id/btn_nine"
         app:layout_constraintLeft_toRightOf="@+id/btn_percent"

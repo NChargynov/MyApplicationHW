@@ -1,4 +1,5 @@
 package com.example.myapplication;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,13 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity {
 
+    static final String TEXT_KEY = "key";
+    TextView textView2;
     Button zero, one, two, three, four, five, six, seven, eight, nine, subtraction, addition,
             divide, multiply, equal, dot;
-
-    TextView textView;
-
     String rawOperand = "";
     Double firstOperand;
     Double secondOperand;
@@ -24,38 +24,39 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_second);
 
-            zero = findViewById(R.id.btn_zero);
-            one = findViewById(R.id.btn_one);
-            two = findViewById(R.id.btn_two);
-            three = findViewById(R.id.btn_three);
-            four = findViewById(R.id.btn_four);
-            five = findViewById(R.id.btn_five);
-            six = findViewById(R.id.btn_six);
-            seven = findViewById(R.id.btn_seven);
-            eight = findViewById(R.id.btn_eight);
-            nine = findViewById(R.id.btn_nine);
-            subtraction = findViewById(R.id.btn_subtraction);
-            addition = findViewById(R.id.btn_addition);
-            divide = findViewById(R.id.btn_divide);
-            multiply = findViewById(R.id.btn_multiply);
-            equal = findViewById(R.id.btn_equal);
-            dot = findViewById(R.id.btn_dot);
-            textView = findViewById(R.id.resultTV);
-
-            if (savedInstanceState != null) {
-                firstOperand = savedInstanceState.getDouble("first");
-                secondOperand = savedInstanceState.getDouble("second");
-                operation = savedInstanceState.getString("oper");
-                rawOperand = savedInstanceState.getString("rawOper");
-                result = savedInstanceState.getDouble("result");
-            }
+        textView2 = findViewById(R.id.resultTV2);
 
         Intent intent = getIntent();
         if (intent != null) {
-            String text = intent.getStringExtra(SecondActivity.TEXT_KEY);
-            textView.setText(text);
+            String text = intent.getStringExtra(TEXT_KEY);
+            textView2.setText(text);
+        }
+
+        zero = findViewById(R.id.btn_zero);
+        one = findViewById(R.id.btn_one);
+        two = findViewById(R.id.btn_two);
+        three = findViewById(R.id.btn_three);
+        four = findViewById(R.id.btn_four);
+        five = findViewById(R.id.btn_five);
+        six = findViewById(R.id.btn_six);
+        seven = findViewById(R.id.btn_seven);
+        eight = findViewById(R.id.btn_eight);
+        nine = findViewById(R.id.btn_nine);
+        subtraction = findViewById(R.id.btn_subtraction);
+        addition = findViewById(R.id.btn_addition);
+        divide = findViewById(R.id.btn_divide);
+        multiply = findViewById(R.id.btn_multiply);
+        equal = findViewById(R.id.btn_equal);
+        dot = findViewById(R.id.btn_dot);
+
+        if (savedInstanceState != null) {
+            firstOperand = savedInstanceState.getDouble("first");
+            secondOperand = savedInstanceState.getDouble("second");
+            operation = savedInstanceState.getString("oper");
+            rawOperand = savedInstanceState.getString("rawOper");
+            result = savedInstanceState.getDouble("result");
         }
     }
 
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 enterNumber(".");
                 break;
             case R.id.btn_clear:
-                textView.setText("");
+                textView2.setText("");
                 rawOperand = "";
                 firstOperand = null;
                 secondOperand = null;
@@ -123,21 +124,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onStartNextActivityClick(View v){
-        String text = textView.getText().toString();
-        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+        String text = textView2.getText().toString();
+        Intent intent = new Intent(SecondActivity.this, MainActivity.class);
         intent.putExtra(SecondActivity.TEXT_KEY, text);
         startActivity(intent);
     }
 
-    public void onClickSave(View v){
-        Intent intent = new Intent();
-        intent.putExtra("KEY_FOR_MAIN_LAUNCHER", textView.getText().toString());
-        setResult(RESULT_OK, intent);
-        finish();
-    }
-
     public void enterNumber(String number) {
-        textView.append(number);
+        textView2.append(number);
         rawOperand += number;
     }
 
@@ -171,22 +165,22 @@ public class MainActivity extends AppCompatActivity {
                     switch (operation) {
                         case "+":
                             result = firstOperand + secondOperand;
-                            textView.append("=" + result);
+                            textView2.append("=" + result);
                             break;
                         case "*":
                             result = firstOperand * secondOperand;
-                            textView.append("=" + result);
+                            textView2.append("=" + result);
                             break;
                         case "/":
                             result = firstOperand / secondOperand;
-                            textView.append("=" + result);
+                            textView2.append("=" + result);
                             break;
                         case "-":
                             result = firstOperand - secondOperand;
-                            textView.append("=" + result);
+                            textView2.append("=" + result);
                             break;
-                            default:
-                                break;
+                        default:
+                            break;
                     }
                 }
             default:
@@ -196,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void enterOperation(String operation) {
-        textView.append(operation);
+        textView2.append(operation);
         this.operation = operation;
     }
 }
